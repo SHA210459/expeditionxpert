@@ -1,0 +1,18 @@
+Was wir gemacht haben:
+
+Datenbankmodellierung und SQL-Skript:
+Wir haben eine einfache Datenbanktabelle Reiseziele erstellt, die Informationen über verschiedene Reiseziele wie Land, Sprache, Währung, Klima und Sicherheit speichert.
+Ein SQL-Skript wurde erstellt, um diese Tabelle zu erstellen und einige Beispieldaten einzufügen.
+
+Spring Boot Projektsetup:
+Ein Spring Boot-Projekt wurde erstellt, um die Backend-Logik der Anwendung zu implementieren.
+Wir haben einen Reiseziele-Entity-Klasse erstellt, die die Datenbanktabelle widerspiegelt, sowie ein Repository (ReisezieleRepository), um auf die Datenbank zuzugreifen.
+
+RESTful API mit Spring Boot:
+Ein RESTful-Controller (DestinationController) wurde erstellt, um Anfragen zur Abrufung von Reisezielen zu verarbeiten.
+Die Controller-Methoden ermöglichen das Abrufen aller Reiseziele, das Abrufen eines Reiseziels nach ID, das Hinzufügen eines neuen Reiseziels und das Löschen eines Reiseziels.
+
+Frontend-Implementierung mit HTML, CSS und JavaScript:
+Eine einfache HTML-Seite wurde erstellt, um Filteroptionen für Reiseziele anzuzeigen.
+Mit JavaScript haben wir die Filterwerte aus dem Formular abgerufen und eine GET-Anfrage an den Server gesendet, um gefilterte Reiseziele zu erhalten und dynamisch anzuzeigen.
+Thymeleaf-Vorlagen wurden verwendet, um die gefilterten Reiseziele auf einer separaten HTML-Seite anzuzeigen.

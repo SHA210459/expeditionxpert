@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reiseziele Filter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Reiseziele Filter</h1>
+
+<!-- Filteroptionen -->
+<div id="filterOptions">
+    <label for="currencyFilter">Währung:</label>
+    <select id="currencyFilter">
+        <option value="">Alle</option>
+        <!-- Dynamische Optionen für Währung aus der Controller-Datenquelle -->
+        <option th:each="currency : ${currencies}" th:value="${currency}" th:text="${currency}"></option>
+    </select>
+
+    <label for="climateFilter">Klima:</label>
+    <select id="climateFilter">
+        <option value="">Alle</option>
+        <!-- Dynamische Optionen für Klima aus der Controller-Datenquelle -->
+        <option th:each="climate : ${climates}" th:value="${climate}" th:text="${climate}"></option>
+    </select>
+
+    <button onclick="applyFilters()">Filter anwenden</button>
+    <button onclick="resetFilters()">Filter zurücksetzen</button>
+</div>
+
+<!-- Anzeige der Reiseziele in einer Tabelle -->
+<div id="destinationTable">
+    <table>
+        <thead>
+        <tr>
+            <th>Land</th>
+            <th>Sprache</th>
+            <th>Währung</th>
+            <th>Klima</th>
+            <th>Sicherheit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iteration über die Liste der Reiseziele -->
+        <tr th:each="country : ${countries}">
+            <td th:text="${country.land}"></td>
+            <td th:text="${country.sprache}"></td>
+            <td th:text="${country.waehrung}"></td>
+            <td th:text="${country.klima}"></td>
+            <td th:text="${country.sicherheit}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
