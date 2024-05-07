@@ -14,7 +14,7 @@ public class DestinationController {
     @Autowired
     private CountryRepository countryRepository;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String showDestinations(Model model) {
         List<Country> countries = countryRepository.findAll();
         model.addAttribute("countries", countries);

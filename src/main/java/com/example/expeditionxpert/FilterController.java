@@ -24,22 +24,22 @@ public class FilterController {
 
         switch (filterAttribute) {
             case "Land":
-                filteredDestinations = reisezieleRepository.findByLand(filterValue);
+                filteredDestinations = (List<Reiseziele>) reisezieleRepository.findByLand(filterValue);
                 break;
             case "Sprache":
-                filteredDestinations = reisezieleRepository.findBySprache(filterValue);
+                filteredDestinations = (List<Reiseziele>) reisezieleRepository.findBySprache(filterValue);
                 break;
             case "Waehrung":
-                filteredDestinations = reisezieleRepository.findByWaehrung(filterValue);
+                filteredDestinations = (List<Reiseziele>) reisezieleRepository.findByWaehrung(filterValue);
                 break;
             case "Klima":
-                filteredDestinations = reisezieleRepository.findByKlima(filterValue);
+                filteredDestinations = (List<Reiseziele>) reisezieleRepository.findByKlima(filterValue);
                 break;
             case "Sicherheit":
-                filteredDestinations = reisezieleRepository.findBySicherheit(filterValue);
+                filteredDestinations = (List<Reiseziele>) reisezieleRepository.findBySicherheit(filterValue);
                 break;
             default:
-                filteredDestinations = reisezieleRepository.findAll();
+                filteredDestinations = (List<Reiseziele>) reisezieleRepository.findAll();
         }
 
         model.addAttribute("filteredDestinations", filteredDestinations);

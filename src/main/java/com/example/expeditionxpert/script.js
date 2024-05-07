@@ -1,47 +1,51 @@
-// Funktion zum Abrufen und Anzeigen der Reiseziele basierend auf den Filteroptionen
+// Funktion zum Anwenden der Filter
 function applyFilters() {
-    const currencyFilter = document.getElementById('currencyFilter').value;
-    const climateFilter = document.getElementById('climateFilter').value;
+    var selectedCurrency = document.getElementById('currencyFilter').value;
+    var selectedClimate = document.getElementById('climateFilter').value;
 
-    fetch(`/api/countries?currency=${currencyFilter}&climate=${climateFilter}`)
-        .then(response => response.json())
-        .then(data => {
-            const destinationList = document.getElementById('destinationList');
-            destinationList.innerHTML = '';
-
-            data.forEach(country => {
-                const destinationElement = document.createElement('div');
-                destinationElement.classList.add('destination');
-
-                const countryName = document.createElement('h3');
-                countryName.textContent = country.name;
-
-                const currency = document.createElement('p');
-                currency.textContent = `Währung: ${country.currency}`;
-
-                const climate = document.createElement('p');
-                climate.textContent = `Klima: ${country.climate}`;
-
-                // Weitere Informationen je nach Bedarf hinzufügen (z.B. Sprache, Sicherheit)
-
-                destinationElement.appendChild(countryName);
-                destinationElement.appendChild(currency);
-                destinationElement.appendChild(climate);
-
-                destinationList.appendChild(destinationElement);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
+    // AJAX-Aufruf an den Server, um die Reiseziele basierend auf den Filtern zu laden
+    // Hier kannst du z.B. jQuery verwenden
+    $.ajax({
+        url: '/filterDestinations',
+        type: 'GET',
+        data: {
+            currency: selectedCurrency,
+            climate: selectedClimate
+        },
+        success: function(data) {
+            // Aktualisiere die Tabelle mit den neuen Daten
+            updateDestinationTable(data);
+        },
+        error: function() {
+            console.log('Fehler beim Laden der Daten');
+        }
+    });
 }
 
-// Funktion zum Zurücksetzen der Filteroptionen und Anzeige aller Reiseziele
+// Funktion zum Zurücksetzen der Filter
 function resetFilters() {
+    // Setze die Filter zurück (z.B. leere Dropdowns)
     document.getElementById('currencyFilter').value = '';
     document.getElementById('climateFilter').value = '';
-    applyFilters(); // Zeige alle Reiseziele ohne Filter an
+
+    // Lade die Reiseziele ohne Filter
+    applyFilters();
 }
 
-// Initialisierung: Anzeigen aller Reiseziele beim Laden der Seite
-applyFilters();
+// Funktion zum Aktualisieren der Reiseziele-Tabelle
+function updateDestinationTable(destinations) {
+    var tableBody = document.querySelector('#destinationTable tbody');
+    tableBody.innerHTML = ''; // Lösche den aktuellen Inhalt der Tabelle
+
+    // Iteriere über die neuen Reiseziele und füge sie zur Tabelle hinzu
+    destinations.forEach(function(destination) {
+        var row = `<tr>
+            <td>${destination.land}</td>
+            <td>${destination.sprache}</td>
+            <td>${destination.waehrung}</td>
+            <td>${destination.klima}</td>
+            <td>${destination.sicherheit}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+    });
+}

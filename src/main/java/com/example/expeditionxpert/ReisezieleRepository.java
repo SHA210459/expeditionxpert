@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ReisezieleRepository<Reiseziele> extends JpaRepository<Reiseziele, Long> {
+public interface ReisezieleRepository extends JpaRepository<Reiseziele, Long> {
 
     List<Reiseziele> findByLand(String land);
 
